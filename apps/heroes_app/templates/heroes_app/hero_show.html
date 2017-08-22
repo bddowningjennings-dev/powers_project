@@ -1,0 +1,53 @@
+<html>
+  <head>
+    {% load static %}      
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href='{% static "login_app/style.css" %}' />
+  </head>
+  <body>
+   <div class="container">
+      <div class="jumbotron nav">
+        <nav>
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="/heroes">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/heroes/new_power">New Power</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/heroes/new_hero">New Hero</a>
+            </li>
+            <div class="col-md-7"></div>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logoff</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <p>Name: {{hero.name}}</p>
+      <p>Likes: {{hero.user_likes.count}}</p>
+      <p>Powers: {% for power in hero.powers.all %}
+          {% if forloop.counter < hero.powers.all.count %}
+            {{power.name}},
+          {% else %}
+            {{power.name}}
+          {% endif %}
+          {%empty%}
+            None
+        {%endfor%} </p>
+<br><br><p>Add a power:</p>
+      <form action='/heroes/add_power' method='post'>
+        {% csrf_token %}
+        <input type="hidden" value="{{hero.id}}" name='hero_id'>
+        <select name="power">
+        {% for power in powers %}
+          <option value="{{power.id}}">{{power.name}}-{{power.description}}</option>
+        {% endfor %}</p>
+        </select><br><br>
+        <input name="checkbox" type="checkbox">Multiple Powers?</input><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

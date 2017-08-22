@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  /* outline: thin dashed red; */
+}
+.container {
+  text-align: center;
+  padding-top: 60px;
+}
+#underline {
+  border-bottom: thin solid black;
+}
+input {
+  margin: 10px;
+  width: 100px;
+}
+.form-group {
+  margin-left: 20px;
+}
+.lng {
+  width: 100px;
+}
+.jumbotron.nav {
+  padding: 20px;
+  height: 10px;
+}
+.jumbotron.nav a {
+  margin-top: -20px;
+}
+.jumbotron.register {
+  height: 40%;
+}
+.jumbotron.login {
+  height: 30%;
+}
+.nav-space {
+  width: 50%;
+  display: inline-block;
+}
+.nav-item {
+  margin-left: 20px;
+}

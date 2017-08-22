@@ -1,0 +1,64 @@
+<html>
+  <head>
+    {% load static %}      
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href='{% static "login_app/style.css" %}' />
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron nav">
+        <nav>
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="/heroes">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/heroes/new_power">New Power</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/heroes/new_hero">New Hero</a>
+            </li>
+            <div class="col-md-7"></div>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logoff</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row" id="underline">
+          <div class="col-md-4">Hero</div>              
+          <div class="col-md-4">Power(s)</div>              
+          <div class="col-md-4">Likes</div>              
+      </div><br><br>
+
+      {% for hero in heroes%}
+        <div class="row">
+          <div class="col-md-4">
+          <p>
+            <a href="/heroes/hero/{{hero.id}}"> {{hero.name}}</a>
+          </p> 
+          </div>
+          <div class="col-md-4">
+          {% for power in hero.powers.all %}
+            {% if forloop.counter < hero.powers.all.count %}
+              {{power.name}},
+            {% else %}
+              {{power.name}}
+            {% endif %}
+          {% endfor %}
+          </div>
+          <div class="col-md-4">
+            {{hero.user_likes.count}}
+            {% if user in hero.user_likes.all%}
+              <a href="/heroes/unlike/{{hero.id}}"> Unlike </a>
+            {%else%}
+              <a href="/heroes/like/{{hero.id}}"> Like </a>
+            {%endif%}
+          </div>
+      </div>
+      {% endfor %}      
+    </div>
+  </body>
+</html>
